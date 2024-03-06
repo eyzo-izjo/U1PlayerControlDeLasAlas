@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private float speed = 62.5f;
+    private float speed = 50.0f;
     private float turnSpeed = 45.0f;
     private float horizontalInput;
     private float forwardInput;
+    public Camera mainCam;
+    public Camera driverCam;
+    public KeyCode switchKey;
 
     // Start is called before the first frame update
     void Start()
@@ -24,5 +27,11 @@ public class PlayerController : MonoBehaviour
         transform.Translate(Vector3.forward * Time.deltaTime * speed * forwardInput);
         //
         transform.Rotate(Vector3.up, turnSpeed * horizontalInput * Time.deltaTime);
+
+        if(Input.GetKeyDown(switchKey))
+        {
+            mainCam.enabled = !mainCam.enabled;
+            driverCam.enabled = !driverCam.enabled;
+        }
     }
 }
